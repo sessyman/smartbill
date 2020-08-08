@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='UTF-8'>
+	<title>Smartbill</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" media="screen">	
+	<script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+	<script type="text/javascript" src="js/validation.min.js"></script>
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="screen">
+	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/datetime.js"></script>
+	<script type="text/javascript" src="js/numeral.min.js"></script>
+</head>
+
+<body >
+	<nav id="header" class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" style="font-family:verdana;font-size: 21px; color: #f0f" href="home.html">Smartbill</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="home.html">Account Status</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							Airtime
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="vodacom.html">Vodacom Lesotho</a></li>
+							<li><a href="econet.html">Econet Lesotho</a></li>
+						</ul>
+					</li>
+				</ul>
+					
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							Bill Payments
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="lec.html">LEC</a></li>
+							<li><a href="wasco.html">WASCO</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="history.html">Account History</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav">
+					<li><a href="reports.html">Reports</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">            
+				<li class="dropdown">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				  <span class="glyphicon glyphicon-user"></span>&nbsp;<span id="agent">Agent:</span>&nbsp;<span class="caret"></span></a>
+				  <ul class="dropdown-menu">
+					<li><a href="balance.html"><span class="glyphicon glyphicon-signal"></span>&nbsp;Increase Balance</a></li>
+					<li><a href="reset.html"><span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Change Password</a></li>
+					<li><a href="issues.html"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;Report Issues</a></li>
+					<li><a href="#" id="logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Sign Out</a></li>
+				  </ul>
+				</li>
+			  </ul>
+		    </div>
+		</div>
+	</nav>
+	
+	<div style=" min-height: 100%; height: auto;  margin: 0 auto -60px; padding-top: 60px; padding-bottom:60px;"  class="container" style="background-color:green;">
+		Online: <div id="status" ></div>
+		<div class="container" id="historydata" style="background-color:grey; padding:5px;">
+			<div class="col-sm-12">
+				<center><h2>Account Summary</h2></center>
+				<div class="alert alert-info">
+					<span id="currenttime"></span>
+					<script>window.onload = date_time('currenttime');</script>
+					<div class="row"><br/></div>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-6" id="agentnumber"><strong>Agent Number:</strong></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-6" id="business"><strong>Business Name:</strong></div>
+					</div>
+					<div class="row">
+						<div class="col-sm-1"></div>
+						<div class="col-sm-6" id="balance"><strong>Balance:</strong></div>
+					</div>
+				</div>
+				
+				<div class="alert alert-info">
+					<center><h4>Prepaid Vouchers</h4></center>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><a href="econet.html"><img src="img/econet.png" alt="ETL Airtime" height="87" width="87"/></a></div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><a href="vodacom.html"><img src="img/vodacom.png" alt="VCL Airtime" height="87" width="87"/></a></div>
+					</div>
+				</div>
+				
+				<div class="alert alert-info">
+					<center><h4>Econet Airtime</h4></center>
+					<div id="efive"><strong>M5 Airtime:</strong></div>
+					<div id="eten"><strong>M10 Airtime:</strong></div>
+					<div id="etwenty"><strong>M20 Airtime:</strong></div>
+					<div id="efifty"><strong>M50 Airtime:</strong></div>
+					<div id="ehundred"><strong>M100 Airtime:</strong></div>
+					<div id="etwohundred"><strong>M200 Airtime:</strong></div>
+				</div>
+				
+				<div class="alert alert-info">
+					<center><h4>Vodacom Airtime</h4></center>
+					<div id="vfive">M5 Airtime:</div>
+					<div id="vten">M10 Airtime:</div>
+					<div id="vtwenty">M20 Airtime:</div>
+					<div id="vfifty">M50 Airtime:</div>
+					<div id="vhundred">M100 Airtime:</div>
+					<div id="vtwohundred">M200 Airtime:</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!-- <nav id="footer" class="navbar navbar-inverse navbar-fixed-bottom">
+		<div class="container">
+			<a href="http://www.venusdawntech.com"> Venus Dawn Technologies &copy 
+				<script type="text/javascript">
+					var d = new Date();
+					document.write(d.getFullYear());
+				</script>
+			</a>
+		</div>
+    </nav> -->
+	<script type="text/javascript" src="cordova.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

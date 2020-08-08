@@ -1,0 +1,25 @@
+What for
+USSD / MMI requests are those codes that can be dialed on the phone dialer, starting with an asterisk ("*") and ending with a "#" grid to get, for example, an account balance or IMEI code of the phone.
+
+Requests are still needed if you want to sew some "engineering" codes, like Easter eggs in the dialer.
+
+Problem
+For many years, there has been a request for features from Android developers to enable the API, which would allow sending USSD requests and then processing them. A few hundred voices of developers have already been collected under the request, there are as yet no changes.
+
+Not so long ago, a cool application appeared to check the balance of the USSD Checker, which periodically checks the balance and beautifully displays the cost of communication.
+
+To do this, make a call to a number like this: * 100 #. With this no problem. But: the application must receive a response to the USSD request. With this quote, Android himself creates a dialogue and displays the answer, leaving your application in ignorance. If you want to figure out how to get the answer in the absence of the API, this article is for you.
+
+Note: since this is an undocumented way, it may not work on all phones if the developer has made changes to the reference system.
+
+ 
+How to handle USSD requests
+In the package package com.android.phone, the PhoneUtils class, downloaded as part of the Android associated with the telephony, attempts to establish a connection with the com.android.ussd.IExtendedNetworkService service.
+
+On those phones that I tried, this service is not installed. Then the Android simply shows the same dialogue with the response received. If the service is available, it is started and calls are made, which will allow us from the service to see what response was received.
+
+I'll tell you how I wrote a small call me back application that is in the market to send a USSD request to the "Call Me Back" service. This service is available to many operators, and it's free, otherwise what's the point;).
+
+In addition, this is probably the only way to do this on Java without having to rinse the phone. The disadvantage of this is that the phone after the installation of the application will have to restart. This is because stitching with the service occurs only when the PhoneUtils class instance is instantiated, namely, when the phone is turned on.
+
+The following is the aidl file of the IExtendedNetworkService.aidl that you want to include in the Eclipse project.

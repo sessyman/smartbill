@@ -24,8 +24,8 @@ function(){
 	//setTimeout(' window.location.href = "home.html"; ',8000);
 	var data = "";
 	var result = "";
-	/* lec submit */
 	
+	/* lec submit */
 	$('#btn-lec').click(function(e){
 		e.preventDefault();
 		var data = $("#lec-form").serializeArray();
@@ -45,6 +45,7 @@ function(){
 			timeout: 0,
 			success : function(response){
 				var result = JSON.parse(response);
+				console.log(result);
 				if(result.Code == "ok" || result.Code == "OK"){
 					if(result.Confirmation == "ConfirmationRequired"){
 						data.length = 0;
@@ -68,6 +69,7 @@ function(){
 						
 						$('#btn-confirm').click(function(e){
 							e.preventDefault();
+							console.log("Meter number confirmed");
 							data.push({name: 'confirmed', value: 'true'});
 							data.push({name: 'phone', value: result.Agentphone});
 							data.push({name: 'vendor', value: result.Vendor});
@@ -90,12 +92,11 @@ function(){
 								},
 								success : function(response){
 									var result = JSON.parse(response);
-									console.log(result);
 									if(result.Code == "OK"){
 										$("#btn-confirm").html('<img src="btn-ajax-loader.gif" /> &nbsp; Purchasing electricity, wait...');
 										$("#result").fadeIn(100, function(){
 											$("#result").html(
-												'<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; <br/><strong>Receipt:</strong><br/>Rf#: '+result.Receipt+'<br/>Vendor: '+result.AgentName+'<br/>Vendor Phone: '+result.AgentPhone+'<br/><strong>Owner details</strong><br/>Name: '+result.Owner+'<br/>Meter: '+result.Meternumber+'<br/><strong>Transaction details</strong><br/>Amount: M'+numeral(result.Amount).format('0,0.00')+'<br/>Debt: M'+numeral(result.Debt).format('0,0.00')+'<br/>Units: '+result.Units+' KW/h<br/>FBE Units: '+result.FBEUnits+' KW/h<br/>Token: '+result.Token+'<br/><br/><strong><br/>LEC VAT Number: 50007525<br/>LEC Phone: +26652100000<br/></div>'
+												'<div class="alert alert-danger"><center><h5>*** TAX INVOICE ***</h5></center><pre>'+result.Token+'</pre></div>'
 											);
 											$("#btn-confirm").html('<span class="glyphicon glyphicon-arrow-right"></span> &nbsp; Done');
 										});
@@ -177,8 +178,8 @@ function(){
 		});
 		
 	});
-	/*Lec vend request submit */
 	
+	/*Lec vend request submit */
 	$('#tbtn-lec').click(function(e){
 		e.preventDefault();
 		var data = $("#tlec-form").serializeArray();

@@ -11,7 +11,11 @@ $('document').ready(
                 $(document).on("click", "#print-token", function (e) {
                     e.preventDefault();
                     //call print here
-
+					var token = document.getElementById("token").innerHTML;
+					console.log(token);
+					Sunmi.printReceipt(token,onSuccess, onError);
+					function onSuccess(success){console.log(success);}
+					function onError(error){console.log(error);}
                     console.log("Print button defined in lec.js; line 111 [R 120], listener from line 11 to line 16");
                 });
             }
@@ -115,7 +119,7 @@ $('document').ready(
                                                 $("#btn-confirm").html('<img src="btn-ajax-loader.gif" /> &nbsp; Purchasing electricity, wait...');
                                                 $("#result").fadeIn(100, function () {
                                                     $("#result").html(
-                                                            '<div class="alert alert-danger"><center><h5>*** TAX INVOICE ***</h5></center><pre>' + result.Token + '</pre></div>'
+                                                            '<div class="alert alert-danger"><pre id="token">*** TAX INVOICE *** \n\n' + result.Token + '</pre></div>'
                                                             );
                                                     $("#btn-confirm").html('<span class="glyphicon glyphicon-arrow-right"></span> &nbsp; Done').after("<button style=\"visibility: visible;\" type=\"button\" class=\"btn btn-default\" name=\"btn-confirm\" id=\"print-token\"><span class=\"glyphicon glyphicon-print\"></span> &nbsp; Print</button>");
                                                 });
